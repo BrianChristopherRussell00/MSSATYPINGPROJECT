@@ -1,0 +1,33 @@
+﻿<Window x:Class="PracticeProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PracticeProject"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Button  x:Name="StartButton" Background="LightBlue" Grid.Row="1" Content="Start" FontSize="50" Click="StartClicked" > </Button>
+        <Button x:Name="StopButton" Background="Crimson" Grid.Row="2" Content="Stop" FontSize="50 ">  </Button>
+
+
+        
+            <TextBlock x:Name="TextBlock" Grid.Row="1" Grid.Column="1" FontSize="40" TextWrapping="Wrap"></TextBlock>
+            <TextBox x:Name="Textbox" Grid.Row="2" Grid.Column="1" KeyDown="EnterPressed" FontSize="40" TextWrapping="Wrap" ></TextBox>
+
+        <Label x:Name="lblCorrect" Content="{Binding Correct, UpdateSourceTrigger=PropertyChanged}" FontSize="30" Grid.Row="0" Grid.Column="0"></Label>
+        <Label x:Name="lblIncorrect" Content="{Binding Incorrect, UpdateSourceTrigger=PropertyChanged}" FontSize="30" Grid.Row="0" Grid.Column="2"></Label>
+
+    </Grid>
+</Window>
