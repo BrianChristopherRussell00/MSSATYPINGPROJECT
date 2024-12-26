@@ -28,7 +28,7 @@
         <TextBlock x:Name="TxtInterval" Text="---" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="50" Grid.Column="1" Grid.Row="0"   ></TextBlock>
         <Label x:Name="lblCorrect" Content="{Binding Correct, UpdateSourceTrigger=PropertyChanged}" FontSize="30" Grid.Row="0" Grid.Column="0"></Label>
         <Label x:Name="lblIncorrect" Content="{Binding Incorrect, UpdateSourceTrigger=PropertyChanged}" FontSize="30" Grid.Row="0" Grid.Column="2"></Label>
-        <TextBox x:Name="fullName" Grid.Column="2" Grid.Row="2" FontSize="46" Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" MouseDown="nameBoxPressed" Background="Coral" FontFamily="Times New Roman Bold"  ></TextBox>
+        <TextBox x:Name="fullName" Grid.Column="2" Grid.Row="2" FontSize="46" Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Background="Coral" FontFamily="Times New Roman Bold" MouseDoubleClick="fullName_MouseDoubleClick"  />
 
     </Grid>
 </Window>

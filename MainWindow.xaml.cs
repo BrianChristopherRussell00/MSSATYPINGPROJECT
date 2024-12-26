@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
@@ -20,9 +21,9 @@ namespace PracticeProject
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        
+
         DispatcherTimer timer;
-        
+
         int startCount = 60;
         int minCount = 0;
         string[] Story = {
@@ -73,7 +74,7 @@ namespace PracticeProject
         }
 
         private int _correct;
-        public int Correct 
+        public int Correct
         {
             get { return _correct; }
             set
@@ -110,9 +111,9 @@ namespace PracticeProject
             TxtInterval.Text = "---";
             lblCorrect.Content = "Correct " + _correct;
             lblIncorrect.Content = "Incorrect " + _incorrect;
-            fullName.Text = "BEFORE STARTING!Please Enter Your Full Name In Here!(Use spaces if necessary)";
+            fullName.Text = "BEFORE STARTING!Please Double Click and Enter Your Full Name In Here!(Use spaces if necessary)";
             timer = new DispatcherTimer();
-           
+
 
         }
 
@@ -122,6 +123,18 @@ namespace PracticeProject
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(proppertyName));
         }
+
+
+
+        private void fullName_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            fullName.Text = null;
+
+            _fullName = fullName.Text;
+
+
+        }
+
 
         private void EnterPressed(object sender, KeyEventArgs e)
         {
@@ -134,7 +147,8 @@ namespace PracticeProject
 
             }
         }
-        private void IsWordCorrect(object sender, KeyEventArgs e) {
+        private void IsWordCorrect(object sender, KeyEventArgs e)
+        {
             if (Textbox.Text == TextBlock.Text)
             {
                 _correct++;
@@ -149,26 +163,26 @@ namespace PracticeProject
 
             }
             lblCorrect.Content = "Correct " + _correct;
-            lblIncorrect.Content="Incorrect "+ _incorrect;
+            lblIncorrect.Content = "Incorrect " + _incorrect;
         }
 
         private void StartClicked(object sender, RoutedEventArgs e)
         {
             Textbox.Focus();
-            
+
 
             //  timer = new DispatcherTimer();
             // timer.Interval = TimeSpan.FromSeconds(startCount);
             // timer.Tick += Timer_Tick;
             // timer.Start();
             TextBlock.Text = Story[random.Next(0, Story.Length)];
-            Textbox.Text= null;
+            Textbox.Text = null;
             _correct = 0;
             _incorrect = 0;
             lblCorrect.Content = "Correct " + _correct;
             lblIncorrect.Content = "Incorrect " + _incorrect;
-            
-            
+
+
             timer.Tick += new EventHandler(Timer_Tick);
             timer.Interval = TimeSpan.FromSeconds(1);// TimeSpan.FromSeconds(startCount);
             timer.Start();
@@ -176,6 +190,23 @@ namespace PracticeProject
 
         }
 
+
+
+        private void StopClicked(object sender, RoutedEventArgs e)
+        {
+            timer.Stop();
+
+            MessageBox.Show($"{_fullName} typed {_correct} correct words and {_incorrect} incorrect words");
+            string message = $"{_fullName} typed {_correct} correct words and {_incorrect} incorrect words";
+
+            string filePath = @"C:\TextFiles\TypingProject.txt";
+             File.AppendAllText(filePath, message);
+           // lines.Sort();
+          //  lines.Add(message);
+
+            Application.Current.Shutdown();
+
+        }
         private void Timer_Tick(object? sender, EventArgs e)
         {
             if (startCount >= minCount)
@@ -196,23 +227,6 @@ namespace PracticeProject
             }
         }
 
-        private void StopClicked(object sender, RoutedEventArgs e)
-        {
-            timer.Stop();
-
-            MessageBox.Show($"{_fullName} typed {_correct} correct words and {_incorrect} incorrect words");
-            Application.Current.Shutdown();
-
-        }
-
-        private async void nameBoxPressed(object sender, MouseButtonEventArgs e)
-        {
-            fullName.Text = null;
-
-            _fullName = Console.ReadLine();
-
-
-
-        }
+       
     }
 }
