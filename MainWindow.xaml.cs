@@ -197,7 +197,7 @@ namespace PracticeProject
             timer.Stop();
 
             MessageBox.Show($"{_fullName} typed {_correct} correct words and {_incorrect} incorrect words");
-            string message = $"{_fullName} typed {_correct} correct words and {_incorrect} incorrect words";
+            string message = $"{_fullName} typed {_correct} correct words and {_incorrect} incorrect words on {DateTime.Now}";
 
             string filePath = @"C:\TextFiles\TypingProject.txt";
              File.AppendAllText(filePath, message);
